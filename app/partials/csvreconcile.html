@@ -1,25 +1,24 @@
-<div ng-controller="ReconcileCtrl">
+<div ng-controller="CsvReconcileCtrl">
 
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <p align="left">
-        <select class="form-control" ng-model="table" ng-options="table for table in rdb.selectedTables()">
-        </select>
+        For file: <b>{{csv.csvFile.name}}</b>
       </p>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-6">
       <p align="right">
         <i class="fa fa-spinner fa-spin" ng-show="loading"></i>&nbsp;
-        <button class="btn btn-primary" ng-click="ask(table, columns)" ng-class="{disabled: table == ''}">Ask the Oracle!</button>
+        <button class="btn btn-primary" ng-click="ask(table, columns)">Ask the Oracle!</button>
       </p>
     </div>
   </div>
 
-  <table class="table table-scrollable" ng-show="table && table != ''">
+  <table class="table table-scrollable">
     <!-- table and columns -->
     <tr>
-      <th><div class="btn btn-sm btn-block">Table <a>{{table}}</a></div></th>
+      <th><div class="btn btn-sm btn-block">Data subject</div></th>
       <th ng-repeat="column in columns"><div class="btn btn-sm btn-block">Column <a>{{column}}</a></div></th>
     </tr>
 
@@ -46,8 +45,8 @@
               vocab-uri="{{i['vocabulary.uri'][0]}}"
               vocab-title="{{i['vocabulary.title'][0]}}"
               vocab-descr="{{i['vocabulary.description'][0]}}"
-              score="{{i.score | scoreFilter}}"
-              />
+              score="{{i.score | scoreFilter}}">
+            </div>
           </a>
         </div>
       </td>
@@ -66,8 +65,8 @@
               vocab-uri="{{i['vocabulary.uri'][0]}}"
               vocab-title="{{i['vocabulary.title'][0]}}"
               vocab-descr="{{i['vocabulary.description'][0]}}"
-              score="{{i.score | scoreFilter}}"
-              />
+              score="{{i.score | scoreFilter}}">
+            </div>
           </a>
         </div>
       </td>
