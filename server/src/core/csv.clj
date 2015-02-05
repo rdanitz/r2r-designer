@@ -1,4 +1,5 @@
-(ns server.core.csv
+(ns core.csv
+  "Core CSV functionality."
   (:require
     [com.stuartsierra.component :as c]
     [taoensso.timbre :as timbre]
@@ -9,7 +10,9 @@
 
 (timbre/refer-timbre)
 
-(defn separator [file]
+(defn separator 
+  "guesses (stupidly) the separator used in a csv file"
+  [file]
   (let [first-line (re-find #".*[\n\r]" (slurp file))
         tabs (count (filter #(= \tab %) first-line))
         commata (count (filter #(= \, %) first-line))]
@@ -17,11 +20,15 @@
       \tab
       \,)))
 
-(defn set-file [c file]
+(defn set-file 
+  "sets a new CSV file and its separator"
+  [c file]
   (reset! (:csv-file c) file)
   (reset! (:separator c) (separator file)))
 
-(defn get-data [c]
+(defn get-data 
+  "retrieves the first 10 data items of the saved csv file"
+  [c]
   (let [file @(:csv-file c)
         separator @(:separator c)]
     (if file

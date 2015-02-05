@@ -2,6 +2,7 @@
   "Tools for interactive development with the REPL. This file should
    not be included in a production build of the application."
   (:require
+    ;; external namespaces
     [clojure.java.io :as io]
     [clojure.java.shell :as sh]
     [clojure.java.javadoc :refer (javadoc)]
@@ -16,6 +17,7 @@
     [clojure.set :refer :all]
     [clojure.java.classpath :refer :all]
     [clojure.data.json :as json]
+    [clojure.data.csv :as data-csv]
     [com.stuartsierra.component :as c]
     [ring.server.standalone :refer :all]
     [ring.middleware.file-info :refer :all]
@@ -26,21 +28,23 @@
     [edu.ucdenver.ccp.kr.rdf :as rdf]
     [edu.ucdenver.ccp.kr.sparql :as sparql]
     [edu.ucdenver.ccp.kr.sesame.kb :as sesame]
-    [clojure.data.csv :as data-csv]
-    [server.components.datasource :refer :all]
-    [server.components.oracle :refer :all]
-    [server.components.sparqlify :refer :all]
-    [server.components.openrdf :refer :all]
-    [server.components.ring :refer :all]
-    [server.core.db :refer :all]
-    [server.core.csv :as csv]
-    [server.core.oracle :refer :all]
-    [server.core.sparqlify :refer :all]
-    [server.core.openrdf :refer :all]
-    [server.routes.app :refer [app-fn]]
-    [server.system :refer [new-system]]))
+    ;; internal namespaces
+    [components.datasource :refer :all]
+    [components.oracle :refer :all]
+    [components.sparqlify :refer :all]
+    [components.openrdf :refer :all]
+    [components.ring :refer :all]
+    [core.db :refer :all]
+    [core.csv :as csv]
+    [core.oracle :refer :all]
+    [core.sparqlify :refer :all]
+    [core.openrdf :refer :all]
+    [routes.app :refer [app-fn]]
+    [system :refer [new-system]]))
 
 (timbre/refer-timbre)
+
+;; The #'system var holds the system during development in the REPL.
 
 (def system
   "A Var containing an object representing the application under

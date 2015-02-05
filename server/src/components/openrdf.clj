@@ -1,8 +1,9 @@
-(ns server.components.openrdf
+(ns components.openrdf
+  "Encapsulates an OpenRDF connection."
   (:require
     [com.stuartsierra.component :as c]
     [taoensso.timbre :as timbre]
-    [server.core.openrdf :refer :all])
+    [core.openrdf :refer :all])
   (:import
     org.openrdf.repository.http.HTTPRepository))
 

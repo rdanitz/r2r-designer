@@ -1,6 +1,6 @@
 (defproject r2r-designer.server "0.1.0-SNAPSHOT"
   :description "server component for the r2r-designer"
-  :url "http://linda-project.eu"
+  :url "http://rdanitz.github.io/r2r-designer/"
   :license { :name "MIT"
              :url "http://opensource.org/licenses/MIT" }
   :repositories [["aksw-internal" "http://maven.aksw.org/repository/internal/"]]
@@ -21,13 +21,16 @@
     [org.aksw.sparqlify/sparqlify-core "0.6.12" :exclusions [[postgresql/postgresql]]]
     [org.clojure/data.csv "0.1.2"] 
     ]
-  :plugins [[lein-ring "0.8.13"]]
+  :plugins [;; for standalone server: 'lein ring uberjar'
+            [lein-ring "0.8.13"]
+            ;; invoke with 'lein marg -f server.html .'
+            [lein-marginalia "0.8.0"]] 
   :ring {:init server.system/init
          :destroy server.system/destroy
          :handler server.system/app}
   :source-paths ["server/src"]
   :test-paths ["server/test"]
-  :resource-paths ["server/resource" "dist"]
+  :resource-paths ["server/resources" "dist"]
   :profiles {
     :dev {
       :dependencies [

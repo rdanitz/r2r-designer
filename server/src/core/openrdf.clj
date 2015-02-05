@@ -1,4 +1,5 @@
-(ns server.core.openrdf
+(ns core.openrdf
+  "core OpenRDF functions"
   (:require
     [com.stuartsierra.component :as c]
     [taoensso.timbre :as timbre])
@@ -8,7 +9,9 @@
 
 (timbre/refer-timbre)
 
-(defn upload! [c f]
+(defn upload! 
+  "uploads a N3 triple dump to OpenRDF"
+  [c f]
   (let [repo @(:server c)
         uri (:base-uri c)]
     (with-open [conn (.getConnection repo)]

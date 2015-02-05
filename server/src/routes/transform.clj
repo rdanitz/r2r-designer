@@ -1,4 +1,4 @@
-(ns server.routes.transform
+(ns routes.transform
   (:require 
     [compojure.core :refer :all]
     [taoensso.timbre :as timbre]
@@ -7,10 +7,10 @@
     [ring.util.response :refer [response file-response]]
     [clojure.java.io :as io]
     [clojure.data.json :as json]
-    [server.core.db :as db]
-    [server.core.sparqlify :refer :all]
-    [server.core.openrdf :refer :all]
-    [server.routes :refer [preflight]])
+    [core.db :as db]
+    [core.sparqlify :refer :all]
+    [core.openrdf :refer :all]
+    [routes :refer [preflight]])
   (:import java.io.File)) 
 
 

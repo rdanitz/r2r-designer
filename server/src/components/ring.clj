@@ -1,8 +1,9 @@
-(ns server.components.ring
+(ns components.ring
+  "Encapsulates the Ring web server holding the web app."
   (:require
     [com.stuartsierra.component :as c]
     [taoensso.timbre :as timbre]
-    [server.routes.app :refer [app-fn]]
+    [routes.app :refer [app-fn]]
     [ring.server.standalone :refer [serve]]))
 
 (timbre/refer-timbre)
@@ -23,7 +24,9 @@
       (reset! server nil))
     component))
 
-(defn new-ring [app-fn opts]
+(defn new-ring 
+  "Creates a new Ring adapter, holding the server and all api pathes."
+  [app-fn opts]
   (map->Ring {:opts opts 
               :server (atom nil) 
               :app-fn app-fn

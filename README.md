@@ -27,7 +27,8 @@ You will need:
 
 ## Documentation
 
-[Annotated source code](docs/app.html)
+[Annotated frontend sources](docs/app.html)
+[Annotated server sources](docs/server.html)
 
 ## Community
 

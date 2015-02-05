@@ -1,4 +1,6 @@
-(ns server.core.sparqlify
+(ns core.sparqlify
+  "This is a clean wrapper around the Sparqlify functions, that are needed.
+   Essentially, these are (dumber) re-implementations of the specific Main methods."
   (:require
     [com.stuartsierra.component :as c]
     [clojure.java.shell :as sh]
@@ -21,7 +23,9 @@
 
 (timbre/refer-timbre)
 
-(defn mapping-to-file [mapping]
+(defn mapping-to-file 
+  "writes the mapping as string to a temporary file"
+  [mapping]
   (let [mapping-file (if mapping (File/createTempFile "mapping" ".sml"))] 
     (when mapping-file 
       (spit mapping-file mapping))
@@ -32,7 +36,10 @@
 ;;   (RdfViewSystemOld/initSparqlifyFunctions))
 
 ;; pseudo-parse pseudo-options into config [...]
-(defn mapping-to-config [mapping-file]
+(defn mapping-to-config 
+  "pretends to be called as from the command line;
+   returns a CLI config object"
+  [mapping-file]
   (let [options (doto (Options.) (.addOption "m" "mapping" true ""))
         parser (GnuParser.)
         cmd (.parse parser options (into-array String ["-m" mapping-file]))
@@ -41,13 +48,17 @@
 
 ;; sadly cannot easily kill sub-processes when invoking jar's through shell but ... common, seriously guys?
 ;; rough rewrite of sparqlify-core's main; most of the config is not needed? some vars in main are never used
-(defn config-sparqlify [c mapping-file]
+(defn config-sparqlify
+  "returns a configured Sparqlify engine"
+  [c mapping-file]
   ;; (init-sparqlify!)
   (let [pool @(:pool (:datasource c))
         config (mapping-to-config mapping-file)]
     (SparqlifyUtils/createDefaultSparqlifyEngine pool config nil nil)))
 
-(defn start-sparql-endpoint! [sparqlify mapping-file]
+(defn start-sparql-endpoint! 
+  "exposes a Sparqlify endpoint for a given mapping"
+  [sparqlify mapping-file]
   (let [port (:port sparqlify)
         qef (config-sparqlify sparqlify mapping-file)
         server (org.aksw.sparqlify.web.Main/createSparqlEndpoint qef port)]
@@ -57,7 +68,10 @@
     (c/start sparqlify)
     (str (:host sparqlify) ":" (:port sparqlify) "/sparql")))
 
-(defn sparqlify-dump [c mapping-file]
+(defn sparqlify-dump 
+  "dumps the Sparqlify endpoint regarding the given mapping;
+   returns a temp file containing the dump as N3 triples."
+  [c mapping-file]
   (let [qef (config-sparqlify c mapping-file)
         it (QueryExecutionUtils/createIteratorDumpTriples qef)
         f (File/createTempFile "dump" ".nt")]
@@ -65,7 +79,10 @@
       (NTriplesWriter/write out it))
     f))
 
-(defn sparqlify-csv [c mapping-file]
+(defn sparqlify-csv 
+  "wrapper to sparqlify-csv command line tool;
+   returns a temp file containing the dump as N3 triples."
+  [c mapping-file]
   (let [csv-file @(:csv-file (:datasource c))]
     (with-open [in (io/input-stream mapping-file)]
       (let [template-config (CsvMapperCliMain/readTemplateConfig in nil)

@@ -1,11 +1,11 @@
-(ns server.routes.csv
+(ns routes.csv
   (:require 
     [compojure.core :refer :all]
     [taoensso.timbre :as timbre]
     [ring.util.codec :as codec]
-    [server.core.csv :refer :all]
+    [core.csv :refer :all]
     [clojure.data.json :refer [write-str]]
-    [server.routes :refer [preflight]]))  
+    [routes :refer [preflight]]))  
 
 (timbre/refer-timbre)
 

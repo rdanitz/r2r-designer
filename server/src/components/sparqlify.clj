@@ -1,8 +1,9 @@
-(ns server.components.sparqlify
+(ns components.sparqlify
+  "Encapsulates the Sparqlify SPARQL-SQL-Rewriter engine."
   (:require
     [com.stuartsierra.component :as c]
     [taoensso.timbre :as timbre]
-    [server.core.sparqlify :refer :all]))
+    [core.sparqlify :refer :all]))
 
 (timbre/refer-timbre)
 

@@ -1,8 +1,9 @@
-(ns server.components.oracle
+(ns components.oracle
+  "Encapsulates the Suggestion API (LOV or LinDA oracle)."
   (:require
     [com.stuartsierra.component :as c]
     [taoensso.timbre :as timbre]
-    [server.core.oracle :refer :all]))
+    [core.oracle :refer :all]))
 
 (timbre/refer-timbre)
 
@@ -20,11 +21,16 @@
     (reset! (:kb component) nil)
     component))
   
-(defn new-oracle [endpoint]
+(defn new-oracle 
+  "Creates a new Oracle adapter with endpoint."
+  [endpoint]
   (map->Oracle {:endpoint endpoint
-                :vocab-repo-api "http://linda-project.eu/vocabRepo/"
+                ;; knowledge base
                 :kb (atom nil)
+                ;; number of data points to regard
                 :sample 20
+                ;; min score for suggestions
                 :threshold 0.4
+                ;; number of suggestions
                 :limit 20
                 :n 5}))

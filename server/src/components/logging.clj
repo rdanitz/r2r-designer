@@ -1,4 +1,5 @@
-(ns server.components.logging
+(ns components.logging
+  "Logging component."
   (:require
     [com.stuartsierra.component :as c]
     [taoensso.timbre :as timbre]

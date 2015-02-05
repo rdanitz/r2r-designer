@@ -1,4 +1,5 @@
-(ns server.routes.app
+(ns routes.app
+  "This configures and holds the web app with all its routes."
   (:require
     [clojure.stacktrace :as st]
     [taoensso.timbre :as timbre]
@@ -10,17 +11,21 @@
     [compojure.core :refer :all]
     [compojure.handler :as handler]
     [compojure.route :as route]
-    [server.routes.db :refer [db-routes-fn]]
-    [server.routes.csv :refer [csv-routes-fn]]
-    [server.routes.oracle :refer [oracle-routes-fn]]
-    [server.routes.transform :refer [transform-routes-fn]]
+    [routes.db :refer [db-routes-fn]]
+    [routes.csv :refer [csv-routes-fn]]
+    [routes.oracle :refer [oracle-routes-fn]]
+    [routes.transform :refer [transform-routes-fn]]
     ))
 
 (timbre/refer-timbre)
 
+;; some default routes
+
 (defroutes app-routes
   (route/resources "/" {:root "."})
   (route/not-found "Not Found!"))
+
+;; CORS headers
 
 (defn allow-origin [handler]
   (fn [request]
@@ -40,7 +45,9 @@
      (update-in req [:uri]
                 #(if (= "/" %) "/index.html" %)))))
 
-(defn monitor [handler]
+(defn monitor 
+  "middleware to monitor incoming requests and outgoing responses"
+  [handler]
   (fn [{:keys [request-method uri query-string] :as request}]
     (let [response (handler request)]
       (debug request)
@@ -50,7 +57,10 @@
         (debug response)
         response))))
 
-(defn wrap-exception [f]
+(defn wrap-exception 
+  "catches every non-catched exceptions and wraps it into a 500 
+   with a corresponding fault string"
+  [f]
   (fn [request]
     (try (f request)
       (catch Exception e
@@ -58,7 +68,10 @@
           {:status 500
            :body stacktrace})))))
 
-(defn app-fn [component]
+(defn app-fn 
+  "creates an app dynamically according to the current system"
+  [component]
+  ;; 'routes' bundles all routes which constitutes the API
   (-> (routes (db-routes-fn component)
               (csv-routes-fn component)
               (oracle-routes-fn component) 
@@ -68,8 +81,6 @@
       wrap-multipart-params
       (wrap-json-body {:keywords? true})
       (wrap-json-response {:pretty true})
-      ;; (wrap-cors :access-control-allow-origin [#"http://127.0.0.1:9000" #"http://localhost:9000"] 
-      ;;            :access-control-allow-methods [:get :put :post :delete :options])
       wrap-exception
       allow-content-type
       allow-origin
