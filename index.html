@@ -20,6 +20,7 @@
 
         <p class="view"><a href="https://github.com/rdanitz/r2r-designer">View the Project on GitHub <small>rdanitz/r2r-designer</small></a></p>
 
+
         <ul>
           <li><a href="https://github.com/rdanitz/r2r-designer/zipball/master">Download <strong>ZIP File</strong></a></li>
           <li><a href="https://github.com/rdanitz/r2r-designer/tarball/master">Download <strong>TAR Ball</strong></a></li>
@@ -27,8 +28,11 @@
         </ul>
       </header>
       <section>
+        <h1>
+<a id="r2r-designer" class="anchor" href="#r2r-designer" aria-hidden="true"><span class="octicon octicon-link"></span></a>r2r-designer</h1>
 
-<p>This version is an early prototype. Do not use in production.</p>
+<p>An Editor for mapping relational Databases to RDF.
+This version is an early prototype. Do not use in production.</p>
 
 <h2>
 <a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
@@ -49,35 +53,43 @@
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<pre><code>  npm install
-  bower install
-</code></pre>
+<div class="highlight highlight-bash"><pre>    npm install
+    bower install
+    grunt</pre></div>
 
 <h2>
 <a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
 
-<p><a href="docs/app.html">Annotated frontend sources</a></p>
-<p><a href="docs/server.html">Annotated server sources</a></p>
-
-<h2>
-<a id="community" class="anchor" href="#community" aria-hidden="true"><span class="octicon octicon-link"></span></a>Community</h2>
-
 <ul>
-<li><a href="http://linda-project.eu/">LinDA Project</a></li>
+<li><a href="docs/app.html">Annotated frontend sources</a></li>
+<li><a href="docs/server.html">Annotated server sources</a></li>
 </ul>
 
 <h2>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>To start the web application for the R2R designer, run:</p>
+<p>To start the web app containing both the UI and the web service for the R2R designer, run:</p>
 
-<pre><code>    grunt serve
-</code></pre>
+<div class="highlight highlight-bash"><pre>    lein run</pre></div>
 
-<p>To start the web service for the R2R designer, run:</p>
+<p>Alternatively, you can build a standalone JAR file of the web app with:</p>
 
-<pre><code>    lein run
-</code></pre>
+<div class="highlight highlight-bash"><pre>    lein ring uberjar
+    java -jar target/r2r-designer-{version}-standalone.jar</pre></div>
+
+<p>For development purposes, you can alse start the UI and the web service separately:</p>
+
+<p>UI:</p>
+
+<div class="highlight highlight-bash"><pre>    grunt serve</pre></div>
+
+<p>Web service:</p>
+
+<div class="highlight highlight-bash"><pre>    lein repl
+    [<span class="pl-k">in</span> REPL]: (user/dev)
+    [<span class="pl-k">in</span> REPL]: (reset)</pre></div>
+
+<p>Note: Please make sure that you have built the Web UI (see above)!</p>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
