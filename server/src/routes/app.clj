@@ -22,7 +22,7 @@
 ;; some default routes
 
 (defroutes app-routes
-  (route/resources "/" {:root "."})
+  (route/resources "/" {:root "public"})
   (route/not-found "Not Found!"))
 
 ;; CORS headers

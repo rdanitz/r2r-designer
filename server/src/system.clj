@@ -60,34 +60,16 @@
                    :repo "r2r"
                    :base-uri "http://mycompany.com"})
 
-;; This holds the system at runtime.
-;; You can dereference the state with '@system'.
-(def system (atom (new-system 
+;; Configure new system and start it.
+;; When running as a jar, the init fn has to be called by hand.
+(defn -main []
+  (info "calling system/-main")
+  (let [system (new-system 
                     db-opts 
                     #'app-fn 
                     ring-opts 
                     oracle-sparql-endpoint 
                     log-config 
                     sparqlify-opts
-                    openrdf-opts)))
-
-;; Creates the web app by calling a creater function.
-(def app (app-fn @system))
- 
-(defn init 
-  "called when web app is initialized"
-  []
-  (info "init r2r-designer/server.system")
-  (when @system (swap! system c/start)))
-
-(defn destroy 
-  "called when web app is destroyed"
-  []
-  (info "destroy r2r-designer/server.system")
-  (when @system (swap! system c/stop)))
-
-;; Configure new system and start it.
-;; When running as a jar, the init fn has to be called by hand.
-(defn -main []
-  (info "calling server.system/-main")
-  (init))
+                    openrdf-opts)]
+    (c/start system)))

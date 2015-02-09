@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8" content="text/html" http-equiv="Content-Type" /><meta content="server component for the r2r-designer" name="description" /><style type="text/css">/**
+<html><head><meta charset="utf-8" content="text/html" http-equiv="Content-Type" /><meta content="backend for the r2r-designer" name="description" /><style type="text/css">/**
  * SyntaxHighlighter
  * http://alexgorbatchev.com/SyntaxHighlighter
  *
@@ -2865,10 +2865,10 @@ net.brehaut.ClojureTools = (function (SH) {
     build_tree: build_tree
   };
 })(SyntaxHighlighter);
-</script><title>r2r-designer.server -- Marginalia</title></head><body><table><tr><td class="docs"><div class="header"><h1 class="project-name"><a href="http://rdanitz.github.io/r2r-designer/">r2r-designer.server</a></h1><h2 class="project-version">0.1.0-SNAPSHOT</h2><br /><p>server component for the r2r-designer</p>
-</div><div class="dependencies"><h3>dependencies</h3><table><tr><td class="dep-name">org.clojure/clojure</td><td class="dotted"><hr /></td><td class="dep-version">1.6.0</td></tr><tr><td class="dep-name">org.clojure/java.jdbc</td><td class="dotted"><hr /></td><td class="dep-version">0.3.3</td></tr><tr><td class="dep-name">org.clojure/data.json</td><td class="dotted"><hr /></td><td class="dep-version">0.2.4</td></tr><tr><td class="dep-name">com.stuartsierra/component</td><td class="dotted"><hr /></td><td class="dep-version">0.2.1</td></tr><tr><td class="dep-name">compojure</td><td class="dotted"><hr /></td><td class="dep-version">1.1.8</td></tr><tr><td class="dep-name">ring-server</td><td class="dotted"><hr /></td><td class="dep-version">0.3.1</td></tr><tr><td class="dep-name">ring-cors</td><td class="dotted"><hr /></td><td class="dep-version">0.1.4</td></tr><tr><td class="dep-name">ring/ring-json</td><td class="dotted"><hr /></td><td class="dep-version">0.3.1</td></tr><tr><td class="dep-name">clj-http</td><td class="dotted"><hr /></td><td class="dep-version">0.9.2</td></tr><tr><td class="dep-name">edu.ucdenver.ccp/kr-sesame-core</td><td class="dotted"><hr /></td><td class="dep-version">1.4.17</td></tr><tr><td class="dep-name">com.taoensso/timbre</td><td class="dotted"><hr /></td><td class="dep-version">3.2.1</td></tr><tr><td class="dep-name">org.postgresql/postgresql</td><td class="dotted"><hr /></td><td class="dep-version">9.3-1102-jdbc41</td></tr><tr><td class="dep-name">com.zaxxer/HikariCP-java6</td><td class="dotted"><hr /></td><td class="dep-version">2.2.5</td></tr><tr><td class="dep-name">org.aksw.sparqlify/sparqlify-core</td><td class="dotted"><hr /></td><td class="dep-version">0.6.12</td></tr><tr><td class="dep-name">org.clojure/data.csv</td><td class="dotted"><hr /></td><td class="dep-version">0.1.2</td></tr></table></div></td><td class="codes" style="text-align: center; vertical-align: middle;color: #666;padding-right:20px"><br /><br /><br />(this space intentionally left almost blank)</td></tr><tr><td class="docs"><div class="toc"><a name="toc"><h3>namespaces</h3></a><ul><li><a href="#"></a></li><li><a href="#"></a></li><li><a href="#components">components</a></li><li><a href="#components.datasource">components.datasource</a></li><li><a href="#components.logging">components.logging</a></li><li><a href="#components.openrdf">components.openrdf</a></li><li><a href="#components.oracle">components.oracle</a></li><li><a href="#components.ring">components.ring</a></li><li><a href="#components.sparqlify">components.sparqlify</a></li><li><a href="#core">core</a></li><li><a href="#core.csv">core.csv</a></li><li><a href="#core.db">core.db</a></li><li><a href="#core.openrdf">core.openrdf</a></li><li><a href="#core.oracle">core.oracle</a></li><li><a href="#core.sparqlify">core.sparqlify</a></li><li><a href="#dev">dev</a></li><li><a href="#routes">routes</a></li><li><a href="#routes.app">routes.app</a></li><li><a href="#routes.csv">routes.csv</a></li><li><a href="#routes.db">routes.db</a></li><li><a href="#routes.oracle">routes.oracle</a></li><li><a href="#routes.transform">routes.transform</a></li><li><a href="#system">system</a></li></ul></div></td><td class="codes">&nbsp;</td></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#" name=""><h1 class="project-name"></h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs"><p>0.1.0-SNAPSHOT</p>
-</td><td class="codes"><pre class="brush: clojure">(defproject r2r-designer.server 
-  :description &quot;server component for the r2r-designer&quot;
+</script><title>r2r-designer -- Marginalia</title></head><body><table><tr><td class="docs"><div class="header"><h1 class="project-name"><a href="http://rdanitz.github.io/r2r-designer/">r2r-designer</a></h1><h2 class="project-version">0.1</h2><br /><p>backend for the r2r-designer</p>
+</div><div class="dependencies"><h3>dependencies</h3><table><tr><td class="dep-name">org.clojure/clojure</td><td class="dotted"><hr /></td><td class="dep-version">1.6.0</td></tr><tr><td class="dep-name">org.clojure/java.jdbc</td><td class="dotted"><hr /></td><td class="dep-version">0.3.3</td></tr><tr><td class="dep-name">org.clojure/data.json</td><td class="dotted"><hr /></td><td class="dep-version">0.2.4</td></tr><tr><td class="dep-name">com.stuartsierra/component</td><td class="dotted"><hr /></td><td class="dep-version">0.2.1</td></tr><tr><td class="dep-name">compojure</td><td class="dotted"><hr /></td><td class="dep-version">1.1.8</td></tr><tr><td class="dep-name">ring/ring-core</td><td class="dotted"><hr /></td><td class="dep-version">1.3.2</td></tr><tr><td class="dep-name">ring-server</td><td class="dotted"><hr /></td><td class="dep-version">0.4.0</td></tr><tr><td class="dep-name">ring-cors</td><td class="dotted"><hr /></td><td class="dep-version">0.1.4</td></tr><tr><td class="dep-name">ring/ring-json</td><td class="dotted"><hr /></td><td class="dep-version">0.3.1</td></tr><tr><td class="dep-name">clj-http</td><td class="dotted"><hr /></td><td class="dep-version">0.9.2</td></tr><tr><td class="dep-name">edu.ucdenver.ccp/kr-sesame-core</td><td class="dotted"><hr /></td><td class="dep-version">1.4.17</td></tr><tr><td class="dep-name">com.taoensso/timbre</td><td class="dotted"><hr /></td><td class="dep-version">3.2.1</td></tr><tr><td class="dep-name">org.postgresql/postgresql</td><td class="dotted"><hr /></td><td class="dep-version">9.3-1102-jdbc41</td></tr><tr><td class="dep-name">com.zaxxer/HikariCP-java6</td><td class="dotted"><hr /></td><td class="dep-version">2.2.5</td></tr><tr><td class="dep-name">org.aksw.sparqlify/sparqlify-core</td><td class="dotted"><hr /></td><td class="dep-version">0.6.12</td></tr><tr><td class="dep-name">org.clojure/data.csv</td><td class="dotted"><hr /></td><td class="dep-version">0.1.2</td></tr></table></div></td><td class="codes" style="text-align: center; vertical-align: middle;color: #666;padding-right:20px"><br /><br /><br />(this space intentionally left almost blank)</td></tr><tr><td class="docs"><div class="toc"><a name="toc"><h3>namespaces</h3></a><ul><li><a href="#"></a></li><li><a href="#"></a></li><li><a href="#"></a></li><li><a href="#components">components</a></li><li><a href="#components.datasource">components.datasource</a></li><li><a href="#components.logging">components.logging</a></li><li><a href="#components.openrdf">components.openrdf</a></li><li><a href="#components.oracle">components.oracle</a></li><li><a href="#components.ring">components.ring</a></li><li><a href="#components.sparqlify">components.sparqlify</a></li><li><a href="#core">core</a></li><li><a href="#core.csv">core.csv</a></li><li><a href="#core.db">core.db</a></li><li><a href="#core.openrdf">core.openrdf</a></li><li><a href="#core.oracle">core.oracle</a></li><li><a href="#core.sparqlify">core.sparqlify</a></li><li><a href="#dev">dev</a></li><li><a href="#routes">routes</a></li><li><a href="#routes.app">routes.app</a></li><li><a href="#routes.csv">routes.csv</a></li><li><a href="#routes.db">routes.db</a></li><li><a href="#routes.oracle">routes.oracle</a></li><li><a href="#routes.transform">routes.transform</a></li><li><a href="#system">system</a></li></ul></div></td><td class="codes">&nbsp;</td></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#" name=""><h1 class="project-name"></h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs"><p>0.1</p>
+</td><td class="codes"><pre class="brush: clojure">(defproject r2r-designer 
+  :description &quot;backend for the r2r-designer&quot;
   :url &quot;http://rdanitz.github.io/r2r-designer/&quot;
   :license { :name &quot;MIT&quot;
              :url &quot;http://opensource.org/licenses/MIT&quot; }
@@ -2879,7 +2879,8 @@ net.brehaut.ClojureTools = (function (SH) {
     [org.clojure/data.json &quot;0.2.4&quot;]
     [com.stuartsierra/component &quot;0.2.1&quot;]
     [compojure &quot;1.1.8&quot;]
-    [ring-server &quot;0.3.1&quot;]
+    [ring/ring-core &quot;1.3.2&quot;]
+    [ring-server &quot;0.4.0&quot;]
     [ring-cors &quot;0.1.4&quot;]
     [ring/ring-json &quot;0.3.1&quot;]
     [clj-http &quot;0.9.2&quot;]
@@ -2890,43 +2891,41 @@ net.brehaut.ClojureTools = (function (SH) {
     [org.aksw.sparqlify/sparqlify-core &quot;0.6.12&quot; :exclusions [[postgresql/postgresql]]]
     [org.clojure/data.csv &quot;0.1.2&quot;] 
     ]
-  :plugins [;; for standalone server: 'lein ring uberjar'
-            [lein-ring &quot;0.8.13&quot;]
+  :plugins [;; for standalone server: 
+            ;;'lein ring uberjar'
+            ;;'java -jar target/r2r-designer-{version}-standalone.jar
+            [lein-ring &quot;0.9.1&quot;]
             ;; invoke with 'lein marg -f server.html .'
             [lein-marginalia &quot;0.8.0&quot;]] 
-  :ring {:init server.system/init
-         :destroy server.system/destroy
-         :handler server.system/app}
+  :ring {:init system/init
+         :destroy system/destroy
+         :handler system/app}
   :source-paths [&quot;server/src&quot;]
   :test-paths [&quot;server/test&quot;]
-  :resource-paths [&quot;server/resources&quot; &quot;dist&quot;]
+  :resource-paths [&quot;server/resources&quot;]
+  :main system
   :profiles {
     :dev {
       :dependencies [
         [org.clojure/tools.namespace &quot;0.2.5&quot;]
         [org.clojure/java.classpath &quot;0.2.2&quot;]
         [ring-mock &quot;0.1.5&quot;]
-        [ring/ring-devel &quot;1.3.0&quot;]
+        [ring/ring-devel &quot;1.3.2&quot;]
         ]
       :source-paths [&quot;server/dev&quot;]
       :resource-paths [&quot;.tmp&quot; &quot;app&quot;]
       }
-    :uberwar {
-      :aot :all
-      :main server.system
-      :resource-paths [&quot;dist&quot;]
-    }
     :uberjar {
-      :aot :all
-      :main server.system
-      :resource-paths [&quot;dist&quot;]
+      :aot [system]
+      :main system 
       }
     })</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#" name=""><h1 class="project-name"></h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs"><p>Namespace 'user' will always be executed.
 Call '(dev)' to get things started.</p>
 </td><td class="codes"></td></tr><tr><td class="docs">
 </td><td class="codes"><pre class="brush: clojure">(defn dev []
   (require 'dev)
-  (in-ns 'dev))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#components" name="components"><h1 class="project-name">components</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs"><p>Every separate module within the backend is organized as a component;
+  (in-ns 'dev))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#" name=""><h1 class="project-name"></h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs">
+</td><td class="codes"><pre class="brush: clojure">(do (clojure.core/ns system.main (:gen-class)) (clojure.core/defn -main [] ((do (clojure.core/require (quote ring.server.leiningen)) (clojure.core/resolve (quote ring.server.leiningen/serve))) (quote {:ring {:auto-reload? false, :stacktraces? false, :open-browser? false, :destroy system/destroy, :init system/init, :handler system/app}}))))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#components" name="components"><h1 class="project-name">components</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs"><p>Every separate module within the backend is organized as a component;
    every component consists of a list of dependencies to other components,
    and a lifecycle to create, start and stop the component.</p>
 </td><td class="codes"><pre class="brush: clojure">(ns components)</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#components.datasource" name="components.datasource"><h1 class="project-name">components.datasource</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs"><p>Encapsulates a database connection, as well as CSV file management.</p>
@@ -3526,7 +3525,7 @@ rough rewrite of sparqlify-core's main; most of the config is not needed? some v
 </td><td class="codes"><pre class="brush: clojure">(timbre/refer-timbre)</pre></td></tr><tr><td class="docs"><p>some default routes</p>
 </td><td class="codes"></td></tr><tr><td class="docs">
 </td><td class="codes"><pre class="brush: clojure">(defroutes app-routes
-  (route/resources &quot;/&quot; {:root &quot;.&quot;})
+  (route/resources &quot;/&quot; {:root &quot;public&quot;})
   (route/not-found &quot;Not Found!&quot;))</pre></td></tr><tr><td class="docs"><p>CORS headers</p>
 </td><td class="codes"></td></tr><tr><td class="docs">
 </td><td class="codes"><pre class="brush: clojure">(defn allow-origin [handler]
@@ -3769,29 +3768,19 @@ use /resources/lov.n3 to populate a private OpenRDF repository or use another on
                      :port 7531}) </pre></td></tr><tr><td class="docs"><p>Where to dump to the created data?</p>
 </td><td class="codes"><pre class="brush: clojure">(def openrdf-opts {:host &quot;http://localhost:8080/openrdf-sesame&quot;
                    :repo &quot;r2r&quot;
-                   :base-uri &quot;http://mycompany.com&quot;})</pre></td></tr><tr><td class="docs"><p>This holds the system at runtime.
-You can dereference the state with '@system'.</p>
-</td><td class="codes"><pre class="brush: clojure">(def system (atom (new-system 
+                   :base-uri &quot;http://mycompany.com&quot;})</pre></td></tr><tr><td class="docs"><p>Configure new system and start it.
+When running as a jar, the init fn has to be called by hand.</p>
+</td><td class="codes"><pre class="brush: clojure">(defn -main []
+  (info &quot;calling system/-main&quot;)
+  (let [system (new-system 
                     db-opts 
                     #'app-fn 
                     ring-opts 
                     oracle-sparql-endpoint 
                     log-config 
                     sparqlify-opts
-                    openrdf-opts)))</pre></td></tr><tr><td class="docs"><p>Creates the web app by calling a creater function.</p>
-</td><td class="codes"><pre class="brush: clojure">(def app (app-fn @system))</pre></td></tr><tr><td class="docs"><p>called when web app is initialized</p>
-</td><td class="codes"><pre class="brush: clojure">(defn init 
-  []
-  (info &quot;init r2r-designer/server.system&quot;)
-  (when @system (swap! system c/start)))</pre></td></tr><tr><td class="docs"><p>called when web app is destroyed</p>
-</td><td class="codes"><pre class="brush: clojure">(defn destroy 
-  []
-  (info &quot;destroy r2r-designer/server.system&quot;)
-  (when @system (swap! system c/stop)))</pre></td></tr><tr><td class="docs"><p>Configure new system and start it.
-When running as a jar, the init fn has to be called by hand.</p>
-</td><td class="codes"><pre class="brush: clojure">(defn -main []
-  (info &quot;calling server.system/-main&quot;)
-  (init))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr></table><div class="footer">Generated by <a href="https://github.com/gdeer81/marginalia">Marginalia</a>.&nbsp;&nbsp;Syntax highlighting provided by Alex Gorbatchev's <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter</a><div id="floating-toc"><ul><li class="floating-toc-li" id="floating-toc_"></li><li class="floating-toc-li" id="floating-toc_"></li><li class="floating-toc-li" id="floating-toc_components">components</li><li class="floating-toc-li" id="floating-toc_components.datasource">components.datasource</li><li class="floating-toc-li" id="floating-toc_components.logging">components.logging</li><li class="floating-toc-li" id="floating-toc_components.openrdf">components.openrdf</li><li class="floating-toc-li" id="floating-toc_components.oracle">components.oracle</li><li class="floating-toc-li" id="floating-toc_components.ring">components.ring</li><li class="floating-toc-li" id="floating-toc_components.sparqlify">components.sparqlify</li><li class="floating-toc-li" id="floating-toc_core">core</li><li class="floating-toc-li" id="floating-toc_core.csv">core.csv</li><li class="floating-toc-li" id="floating-toc_core.db">core.db</li><li class="floating-toc-li" id="floating-toc_core.openrdf">core.openrdf</li><li class="floating-toc-li" id="floating-toc_core.oracle">core.oracle</li><li class="floating-toc-li" id="floating-toc_core.sparqlify">core.sparqlify</li><li class="floating-toc-li" id="floating-toc_dev">dev</li><li class="floating-toc-li" id="floating-toc_routes">routes</li><li class="floating-toc-li" id="floating-toc_routes.app">routes.app</li><li class="floating-toc-li" id="floating-toc_routes.csv">routes.csv</li><li class="floating-toc-li" id="floating-toc_routes.db">routes.db</li><li class="floating-toc-li" id="floating-toc_routes.oracle">routes.oracle</li><li class="floating-toc-li" id="floating-toc_routes.transform">routes.transform</li><li class="floating-toc-li" id="floating-toc_system">system</li></ul></div></div><script type="text/javascript">SyntaxHighlighter.defaults['gutter'] = false;
+                    openrdf-opts)]
+    (c/start system)))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr></table><div class="footer">Generated by <a href="https://github.com/gdeer81/marginalia">Marginalia</a>.&nbsp;&nbsp;Syntax highlighting provided by Alex Gorbatchev's <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter</a><div id="floating-toc"><ul><li class="floating-toc-li" id="floating-toc_"></li><li class="floating-toc-li" id="floating-toc_"></li><li class="floating-toc-li" id="floating-toc_"></li><li class="floating-toc-li" id="floating-toc_components">components</li><li class="floating-toc-li" id="floating-toc_components.datasource">components.datasource</li><li class="floating-toc-li" id="floating-toc_components.logging">components.logging</li><li class="floating-toc-li" id="floating-toc_components.openrdf">components.openrdf</li><li class="floating-toc-li" id="floating-toc_components.oracle">components.oracle</li><li class="floating-toc-li" id="floating-toc_components.ring">components.ring</li><li class="floating-toc-li" id="floating-toc_components.sparqlify">components.sparqlify</li><li class="floating-toc-li" id="floating-toc_core">core</li><li class="floating-toc-li" id="floating-toc_core.csv">core.csv</li><li class="floating-toc-li" id="floating-toc_core.db">core.db</li><li class="floating-toc-li" id="floating-toc_core.openrdf">core.openrdf</li><li class="floating-toc-li" id="floating-toc_core.oracle">core.oracle</li><li class="floating-toc-li" id="floating-toc_core.sparqlify">core.sparqlify</li><li class="floating-toc-li" id="floating-toc_dev">dev</li><li class="floating-toc-li" id="floating-toc_routes">routes</li><li class="floating-toc-li" id="floating-toc_routes.app">routes.app</li><li class="floating-toc-li" id="floating-toc_routes.csv">routes.csv</li><li class="floating-toc-li" id="floating-toc_routes.db">routes.db</li><li class="floating-toc-li" id="floating-toc_routes.oracle">routes.oracle</li><li class="floating-toc-li" id="floating-toc_routes.transform">routes.transform</li><li class="floating-toc-li" id="floating-toc_system">system</li></ul></div></div><script type="text/javascript">SyntaxHighlighter.defaults['gutter'] = false;
 SyntaxHighlighter.all();
 
 // hackity hack

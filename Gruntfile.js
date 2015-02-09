@@ -1,12 +1,6 @@
 // Generated on 2014-06-24 using generator-angular 0.8.0
 'use strict';
 
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
-
 module.exports = function (grunt) {
 
   // Load grunt tasks automatically
@@ -22,22 +16,15 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
-      dist: 'dist'
+      dist: 'dist',
+      standalone: './server/resources/public'
     },
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-      bower: {
-        files: ['bower.json'],
-        tasks: ['bowerInstall']
-      },
       coffee: {
         files: ['<%= yeoman.app %>/scripts/**/*.{coffee,litcoffee,coffee.md}'],
         tasks: ['newer:coffee:dist']
-      },
-      coffeeTest: {
-        files: ['test/spec/**/*.{coffee,litcoffee,coffee.md}'],
-        tasks: ['newer:coffee:test', 'karma']
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -76,16 +63,6 @@ module.exports = function (grunt) {
           ]
         }
       },
-      test: {
-        options: {
-          port: 9001,
-          base: [
-            '.tmp',
-            'test',
-            '<%= yeoman.app %>'
-          ]
-        }
-      },
       dist: {
         options: {
           base: '<%= yeoman.dist %>'
@@ -116,6 +93,17 @@ module.exports = function (grunt) {
           ]
         }]
       },
+      standalone: {
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            '<%= yeoman.standalone %>/*',
+            '!<%= yeoman.standalone %>/.git*',
+            '!<%= yeoman.standalone %>/api'
+          ]
+        }]
+      },
       server: '.tmp'
     },
 
@@ -134,18 +122,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Automatically inject Bower components into the app
-    bowerInstall: {
-      app: {
-        src: ['<%= yeoman.app %>/index.html'],
-        ignorePath: '<%= yeoman.app %>/'
-      },
-      sass: {
-        src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-        ignorePath: '<%= yeoman.app %>/bower_components/'
-      }
-    },
-
     // Compiles CoffeeScript to JavaScript
     coffee: {
       options: {
@@ -158,15 +134,6 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/scripts',
           src: '**/*.{coffee,litcoffee,coffee.md}',
           dest: '.tmp/scripts',
-          ext: '.js'
-        }]
-      },
-      test: {
-        files: [{
-          expand: true,
-          cwd: 'test/spec',
-          src: '**/*.{coffee,litcoffee,coffee.md}',
-          dest: '.tmp/spec',
           ext: '.js'
         }]
       }
@@ -343,59 +310,27 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      standalone: {
+        expand: true,
+        cwd: '<%= yeoman.dist %>',
+        dest: '<%= yeoman.standalone %>',
+        src: '**/*'
       }
     },
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'coffee:dist',
+        'coffee:server',
         'compass:server'
       ],
-      test: [
-        'coffee',
-        'compass'
-      ],
       dist: [
-        'coffee',
+        'coffee:dist',
         'compass:dist',
         'imagemin',
         'svgmin'
       ]
-    },
-
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css',
-    //         '<%= yeoman.app %>/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
-
-    // Test settings
-    karma: {
-      unit: {
-        configFile: 'karma.conf.js',
-        singleRun: true
-      }
     },
 
     ngtemplates: {
@@ -416,7 +351,7 @@ module.exports = function (grunt) {
         src: ['app/**/*.litcoffee'],
         options: {
           output: 'docs/'
-        }        
+        }
       }
     }
   });
@@ -429,8 +364,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'bowerInstall',
-      // 'ngtemplates:app',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -438,22 +371,8 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('server', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve:' + target]);
-  });
-
-  grunt.registerTask('test', [
-    'clean:server',
-    'concurrent:test',
-    'autoprefixer',
-    'connect:test',
-    'karma'
-  ]);
-
   grunt.registerTask('build', [
     'clean:dist',
-    'bowerInstall',
     'useminPrepare',
     'ngtemplates:dist',
     'concurrent:dist',
@@ -470,7 +389,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'newer:jshint',
-    'test',
-    'build'
+    'build',
+    'copy:standalone'
   ]);
 };

@@ -20,33 +20,49 @@ You will need:
 
 ## Installation
 
+```bash
+    npm install
+    bower install
+    grunt
 ```
-  npm install
-  bower install
-```
+
 
 ## Documentation
 
 - [Annotated frontend sources](docs/app.html)
 - [Annotated server sources](docs/server.html)
 
-## Community
-
-* [LinDA Project](http://linda-project.eu/)
 
 ## Usage
 
-To start the web application for the R2R designer, run:
+To start the web app containing both the UI and the web service for the R2R designer, run:
 
+```bash
+    lein run
 ```
+
+Alternatively, you can build a standalone JAR file of the web app with:
+
+```bash
+    lein ring uberjar
+    java -jar target/r2r-designer-{version}-standalone.jar
+```
+
+For development purposes, you can alse start the UI and the web service separately:
+
+UI:
+```bash
     grunt serve
 ```
 
-To start the web service for the R2R designer, run:
+Web service:
+```bash
+    lein repl
+    [in REPL]: (user/dev)
+    [in REPL]: (reset)
+```
 
-```
-    lein run
-```
+Note: Please make sure that you have built the Web UI (see above)!
 
 ## License
 
